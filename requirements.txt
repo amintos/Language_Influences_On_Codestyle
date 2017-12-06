@@ -1,0 +1,3 @@
+pylint==1.7.4
+GitPython==2.1.6
+requests==2.18.4
