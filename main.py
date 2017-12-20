@@ -33,9 +33,10 @@ def main():
           .format(len(sample_projects)))
 
     token = config['github-token']
+    ghuser = config['github-user']
     existing_projects = []
     for project in sample_projects:
-        r = requests.get(project[1], auth=('shorschig', token))
+        r = requests.get(project[1], auth=(ghuser, token))
         obj = json.loads(r.text)
         if 'clone_url' in obj.keys():
             existing_projects.append((obj['clone_url'], project[3]))

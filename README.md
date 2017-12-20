@@ -40,8 +40,10 @@ password: password
 host: 127.0.0.1
 # The port on which to reach the database (default)
 port: 5432
-# Your personal github token for checking out the projects
+# Your personal GitHub token for checking out the projects
 github-token: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+# Your GitHub account name (which generated your token)
+github-user: ghuser
 # The directory to where you want to clone the projects
 repo-dir: /path/to/folder/
 ```
