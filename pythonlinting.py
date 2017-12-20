@@ -43,8 +43,11 @@ def lint_file(file):
     score_pos = output.find('has been rated at ')
     if score_pos < 0:
         print('Lint failed, trying to lint as python2 file')
-        python2_command = 'py oldlint.py {}'.format(file)
-
+        exit_code, _ = subprocess.getstatusoutput('py --version')
+        if exit_code:
+            python2_command = 'python oldlint.py {}'.format(file)
+        else:
+            python2_command = 'py oldlint.py {}'.format(file)
         process = subprocess.Popen(python2_command.split(),
                                    stdout=subprocess.PIPE)
         output, error = process.communicate()
