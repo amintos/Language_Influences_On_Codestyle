@@ -13,7 +13,7 @@ After cloning the project, you should install the dependencies (for python 3, ma
 pip install -r requirements.txt
 ```
 
-To enable linting for Python 2 files, you also need to install (http://pylint.readthedocs.io/en/latest/intro.html)[pylint]. (This command is under the assumption that `python` refers to a Python 2 version.)
+To enable linting for Python 2 files, you also need to install [pylint](http://pylint.readthedocs.io/en/latest/intro.html). (This command is under the assumption that `python` refers to a Python 2 version.)
 ```bash
 python -m pip install pylint
 ```
@@ -25,7 +25,7 @@ py -2.7 -m pip install pylint
 
 ### Configuration
 
-You need access to the (http://ghtorrent.org/)[GHTorrent Database] via a Postgres server. You can configure the access to it in the config-yml file (you have to create this yourself).
+You need access to the [GHTorrent Database](http://ghtorrent.org/) via a Postgres server. You can configure the access to it in the config-yml file (you have to create this yourself).
 
 Example file:
 
@@ -48,7 +48,7 @@ repo-dir: /path/to/folder/
 
 ## Running it
 
-<WIP>
+_Work in Progress_
 
 Simply run the main file on the command line:
 
