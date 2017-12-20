@@ -36,10 +36,10 @@ def main():
     ghuser = config['github-user']
     existing_projects = []
     for project in sample_projects:
-        r = requests.get(project[1], auth=(ghuser, token))
+        r = requests.get(project[0], auth=(ghuser, token))
         obj = json.loads(r.text)
         if 'clone_url' in obj.keys():
-            existing_projects.append((obj['clone_url'], project[3]))
+            existing_projects.append((obj['clone_url'], project[1]))
     print('{} projects are reachable.'
           .format(len(existing_projects)))
 
