@@ -24,7 +24,7 @@ def lint_file_or_project(path):
         results.update(lint_file(path))
         files = 1
     elif os.path.isdir(path):
-        for filename in glob2.iglob(path + '**/*.py', recursive=True):
+        for filename in glob2.glob(path + '/**/*.py'):
             results.update(lint_file(filename))
             files += 1
     else:
@@ -53,6 +53,9 @@ def lint_file(file):
         output, error = process.communicate()
         output = output.decode('utf-8')
         score_pos = output.find('has been rated at ')
+        if score_pos < 0:
+            print('Lint failed with python 2 and 3, skipping file.')
+            return []
     score_pos += 18
     score = float(output[score_pos:score_pos + 8].strip()[:-3])
     print(10.0 - score)
