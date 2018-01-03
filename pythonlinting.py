@@ -1,5 +1,5 @@
 import argparse
-import glob
+import glob2
 import os
 from pylint import epylint as lint
 import subprocess
