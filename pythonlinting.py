@@ -24,7 +24,7 @@ def lint_file_or_project(path):
         results.update(lint_file(path))
         files = 1
     elif os.path.isdir(path):
-        for filename in glob.iglob(path + '**/*.py', recursive=True):
+        for filename in glob2.iglob(path + '**/*.py', recursive=True):
             results.update(lint_file(filename))
             files += 1
     else:
