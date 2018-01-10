@@ -89,6 +89,8 @@ def file_len(fname):
         with open(fname, encoding="utf-8") as f:
             for i, l in enumerate(f):
                 pass
+    except:
+        print('Unicode doesn\'t work either, skipping number of lines for now')
     return i + 1
 
 if __name__ == '__main__':
