@@ -35,7 +35,7 @@ def lint_file_or_project(path):
     else:
         print('Invalid file/folder name!')
     print('{} files parsed.'.format(files))
-    return results, files, lines
+    return results, files, lines_total
 
 
 def lint_file(file):
