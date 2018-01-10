@@ -19,18 +19,23 @@ def main():
 
 def lint_file_or_project(path):
     results = Counter()
+    lines_total = 0
     files = 0
     if os.path.isfile(path):
-        results.update(lint_file(path))
+        errors, lines = lint_file(path)
+        results.update(errors)
+        lines_total += lines
         files = 1
     elif os.path.isdir(path):
         for filename in glob2.glob(path + '/**/*.py'):
-            results.update(lint_file(filename))
+            errors, lines = lint_file(filename)
+            results.update(errors)
+            lines_total += lines
             files += 1
     else:
         print('Invalid file/folder name!')
     print('{} files parsed.'.format(files))
-    return results, files
+    return results, files, lines
 
 
 def lint_file(file):
@@ -63,7 +68,7 @@ def lint_file(file):
     # score not interesting for now, maybe later
     # still parsing it to check for success in parsing
     # print(output)
-    return parse_result(output)
+    return parse_result(output), file_len(file)
 
 
 def parse_result(result):
@@ -71,6 +76,14 @@ def parse_result(result):
     for match in re.finditer(r'((?!\()[A-Z]\d+), [^\s]+, [^\s]+', result):
         errors.append(tuple(match.group().split(',')[:2]))
     return errors
+
+
+def file_len(fname):
+    with open(fname) as f:
+        i = -1
+        for i, l in enumerate(f):
+            pass
+    return i + 1
 
 if __name__ == '__main__':
     main()

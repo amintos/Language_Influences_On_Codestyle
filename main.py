@@ -23,7 +23,7 @@ def main():
     db = DBAccessor(config)
     ccandidates = db.get_candidates('cpp', 'python')
     jcandidates = db.get_candidates('java', 'python')
-    candidates = ccandidates.extend(jcandidates)
+    candidates = ccandidates + jcandidates
     print('{} candidates found.'.format(len(candidates)))
 
     sample_projects = set()
@@ -53,7 +53,7 @@ def main():
 
     print('Linting projects:')
     for project_dir in os.listdir(config['repo-dir']):
-        error_codes, num_files = lint_file_or_project(project_dir)
+        error_codes, num_files, num_lines = lint_file_or_project(project_dir)
         print(error_codes)
 
 if __name__ == '__main__':
