@@ -21,7 +21,9 @@ def main():
         config = yaml.load(cfg)
 
     db = DBAccessor(config)
-    candidates = db.get_candidates('cpp', 'java', 'python')
+    ccandidates = db.get_candidates('cpp', 'python')
+    jcandidates = db.get_candidates('java', 'python')
+    candidates = ccandidates.extend(jcandidates)
     print('{} candidates found.'.format(len(candidates)))
 
     sample_projects = set()

@@ -32,12 +32,18 @@ class DBAccessor():
         self._cfg = cfg
 
     def get_candidates(self, primary_lang,
-                       primary_lang2, second_lang, thresh=THRESH_SIGNIFICANCE,
+                       second_lang, thresh=THRESH_SIGNIFICANCE,
                        exp=MORE_EXPERIENCE):
-        query = ('SELECT * FROM lics_languages_per_author ' +
-                 'WHERE {0}changes > {3} AND (({1}changes <= {3} AND ' +
-                 '{2}changes > {4}*{0}changes) OR ({2}changes <= {3} ' +
-                 'AND {1}changes > {4}*{0}changes));').format(
+        primary_lang2 = [l for l in self.LANG_PREFIX.keys()
+                         if l not in (primary_lang, second_lang)]
+        if len(primary_lang2) > 1:
+            print('Inferring of the second primary language failed.')
+            return []
+        else:
+            primary_lang2 = primary_lang2[0]
+        query = ('''SELECT * FROM lics_languages_per_author
+                    WHERE {0}changes > {3} AND ({1}changes <= {3} AND
+                    {2}changes > {4}*{0}changes);''').format(
             self.LANG_PREFIX[second_lang],
             self.LANG_PREFIX[primary_lang],
             self.LANG_PREFIX[primary_lang2],
@@ -51,9 +57,9 @@ class DBAccessor():
         return result
 
     def get_projects_for_user(self, user_id, lang=None):
-        query = ('SELECT url, name FROM projects WHERE id IN ' +
-                 '(SELECT repo_id FROM project_members ' +
-                 'WHERE user_id =\'{}\')').format(user_id)
+        query = ('''SELECT url, name FROM projects WHERE id IN
+                    (SELECT repo_id FROM project_members
+                     WHERE user_id =\'{}\')''').format(user_id)
         if lang:
             query += 'AND LOWER(language) LIKE LOWER(\'{}\')'.format(lang)
         result = []
