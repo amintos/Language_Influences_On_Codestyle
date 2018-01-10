@@ -61,7 +61,7 @@ def lint_file(file):
         score_pos = output.find('has been rated at ')
         if score_pos < 0:
             print('Lint failed with python 2 and 3, skipping file.')
-            return []
+            return [], 0
     score_pos += 18
     score = float(output[score_pos:score_pos + 8].strip()[:-3])
     print(10.0 - score)
