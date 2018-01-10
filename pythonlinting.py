@@ -79,10 +79,17 @@ def parse_result(result):
 
 
 def file_len(fname):
-    num_lines = 0
-    with open(fname) as f:
-        num_lines = sum(1 for line in f)
-    return num_lines
+    i = -1
+    try:
+        with open(fname) as f:
+            for i, l in enumerate(f):
+                pass
+    except UnicodeDecodeError:
+        print('Error opening file, trying utf-8')
+        with open(fname, encoding="utf-8") as f:
+            for i, l in enumerate(f):
+                pass
+    return i + 1
 
 if __name__ == '__main__':
     main()
