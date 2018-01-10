@@ -79,11 +79,10 @@ def parse_result(result):
 
 
 def file_len(fname):
+    num_lines = 0
     with open(fname) as f:
-        i = -1
-        for i, l in enumerate(f):
-            pass
-    return i + 1
+        num_lines = sum(1 for line in f)
+    return num_lines
 
 if __name__ == '__main__':
     main()

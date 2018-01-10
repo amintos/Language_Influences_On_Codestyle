@@ -56,6 +56,27 @@ class DBAccessor():
             result = cursor.fetchall()
         return result
 
+    def get_baseline_programmers(self, lang, min_changes=1000,
+                                 thresh=THRESH_SIGNIFICANCE,
+                                 result_size=100):
+        second_lang, second_lang2 = [l for l in self.LANG_PREFIX.keys()
+                                     if l != lang]
+        query = '''SELECT * FROM lics_languages_per_author
+                    WHERE {0}changes > {3} AND ({1}changes <= {4} AND
+                    {2}changes <= {4}) LIMIT {5};'''.format(
+            self.LANG_PREFIX[lang],
+            self.LANG_PREFIX[second_lang],
+            self.LANG_PREFIX[second_lang2],
+            min_changes,
+            thresh,
+            result_size)
+        result = []
+        with PSQLConn(self._cfg) as conn:
+            cursor = conn.cursor()
+            cursor.execute(query)
+            result = cursor.fetchall()
+        return result
+
     def get_projects_for_user(self, user_id, lang=None):
         query = ('''SELECT url, name FROM projects WHERE id IN
                     (SELECT repo_id FROM project_members
