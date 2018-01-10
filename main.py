@@ -4,8 +4,8 @@ import git
 import string
 import yaml
 import os
-from .dbaccessor import DBAccessor
-from .pythonlinting import lint_file_or_project
+from dbaccessor import DBAccessor
+from pythonlinting import lint_file_or_project
 
 
 def format_filename(s):
