@@ -86,6 +86,13 @@ def file_len(fname):
                 pass
     except UnicodeDecodeError:
         print('Error opening file, trying utf-8')
+        return file_len_utf8(fname)
+    return i + 1
+
+
+def file_len_utf8(fname):
+    i = -1
+    try:
         with open(fname, encoding="utf-8") as f:
             for i, l in enumerate(f):
                 pass
