@@ -42,8 +42,8 @@ class DBAccessor():
         else:
             primary_lang2 = primary_lang2[0]
         query = ('''SELECT * FROM lics_languages_per_author
-                    WHERE {0}changes > {3} AND ({1}changes <= {3} AND
-                    {2}changes > {4}*{0}changes);''').format(
+                    WHERE {0}changes > {3} AND ({2}changes <= {3} AND
+                    {1}changes > {4}*{0}changes);''').format(
             self.LANG_PREFIX[second_lang],
             self.LANG_PREFIX[primary_lang],
             self.LANG_PREFIX[primary_lang2],
