@@ -1,3 +1,6 @@
+# -- Unmaintained, please look at the notebook in this repository
+# This is a less interactive version of the jupyter notebook,
+# but essentially the same functionality
 import requests
 import json
 import git
