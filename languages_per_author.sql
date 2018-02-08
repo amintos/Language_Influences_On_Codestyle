@@ -1,3 +1,5 @@
+-- Create a table which consists of all the changes for 3 chosen languages (java, python, c++) for each author.
+-- Note: Enormous runtime due to frequent access to the raw_patches table.
 CREATE TABLE lics_languages_per_author AS
 (SELECT author_id, sum(pycommit.changes) as pychanges, sum(jcommit.changes) as jchanges, sum(ccommit.changes) as cchanges FROM
 

@@ -134,7 +134,9 @@ def parse_result(result):
     """
     errors = []
     for match in re.finditer(r'((?!\()[A-Z]\d+), [^\s]+, [^\s]+', result):
-        errors.append(ErrorCode(*match.group().split(',')[:2]))
+        err = match.group().split(',')[:2]
+        err = ErrorCode(err[0], err[1].strip())
+        errors.append(err)
     return errors
 
 

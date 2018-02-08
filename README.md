@@ -4,6 +4,8 @@ The goal of this project is to find if profession in certain programming languag
 
 A (constructed) example: If we have a developer who programmed a lot of Java in his career and he now tries to write some Python code, will he make some mistakes we can classify as "typical" for a Java developer? E.g. certain naming conventions, unneeded wrapper classes ect.
 
+__For a further introduction to the topic and a guideline on how this works, have a look into the [notebook](https://github.com/shorschig/Language_Influences_On_Codestyle/blob/master/Language_Influences_On_Codestyle.ipynb).__
+
 ## Setup
 
 ### Requirements
@@ -52,7 +54,10 @@ repo-dir: /path/to/folder/
 
 _Work in Progress_
 
-Simply run the main file on the command line:
+__Recommended:__ Install [jupyter notebook](http://jupyter.org/) and serve this folder, then have a look at the [notebook](https://github.com/shorschig/Language_Influences_On_Codestyle/blob/master/Language_Influences_On_Codestyle.ipynb). It is an interactive version of this pipeline and includes a lot of explanations.
+
+_Deprecated_:
+There is a main file you can run that demonstrates basic functionality:
 
 ```bash
 python3 main.py
