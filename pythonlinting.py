@@ -23,13 +23,15 @@ def main():
     parser.add_argument('file', metavar='File', type=str,
                         help='the file to be analysed')
     parser.add_argument('--verbose', dest='verbose', action='store_true')
+    parser.add_argument('--file-limit', dest='file_limit', type=int,
+                        default=-1)
     parser.set_defaults(verbose=False)
 
     args = parser.parse_args()
-    print(lint_file_or_project(args.file, args.verbose))
+    print(lint_file_or_project(args.file, args.verbose, args.file_limit))
 
 
-def lint_file_or_project(path, verbose=False):
+def lint_file_or_project(path, verbose=False, file_limit=-1):
     """Lint input, file or project.
 
     Args:
@@ -53,6 +55,12 @@ def lint_file_or_project(path, verbose=False):
         lines_total += lines
         files = 1
     elif os.path.isdir(path):
+        if file_limit > -1:
+            files_in_folder = sum([len(f) for _, _, f in os.walk(path)])
+            if files_in_folder > file_limit:
+                print('Skipping {} due to file limit ({} files, {} are limit)'
+                      .format(path, files_in_folder, file_limit))
+                return results, files, lines_total
         for filename in glob2.glob(path + '/**/*.py'):
             errors, lines = lint_file(filename, verbose)
             results.update(errors)
